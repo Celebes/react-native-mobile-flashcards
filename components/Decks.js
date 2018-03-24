@@ -1,39 +1,32 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, FlatList} from 'react-native';
 import {getDecks} from '../utils/api';
 import {receiveDecks} from '../actions';
-import {AppLoading} from 'expo';
+import DeckListItem from './DeckListItem';
+import {transformDecksToListArray} from "../utils/helpers";
 
 class Decks extends Component {
-    state = {
-        ready: false,
-    }
-
     componentDidMount() {
-        const {dispatch} = this.props
+        const {dispatch} = this.props;
 
         getDecks()
             .then(decks => dispatch(receiveDecks(decks)))
-            .then(() => this.setState(() => ({ready: true})))
     }
 
-    render() {
-        const {decks} = this.props
-        const {ready} = this.state
+    renderItem = ({item}) => {
+         return <DeckListItem {...item}/>
+    };
 
-        if (ready === false) {
-            return <AppLoading/>
-        }
+    render() {
+        const decksList = transformDecksToListArray(this.props.decks);
 
         return (
             <View style={styles.container}>
-                <Text>
+                <Text style={{alignSelf: 'center'}}>
                     DECKS
                 </Text>
-                <Text>
-                    {JSON.stringify(decks)}
-                </Text>
+                <FlatList data={decksList} renderItem={this.renderItem}/>
             </View>
         )
     }
@@ -43,8 +36,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: 'stretch',
     }
 });
 
