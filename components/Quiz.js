@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {StyleSheet, View, Text, TextInput, TouchableOpacity} from 'react-native';
 import {getDecksFromDB} from "../utils/api";
 import {receiveDecks} from "../actions";
+import {clearLocalNotification, setLocalNotification} from "../utils/helpers";
 
 class Quiz extends Component {
     state = {
@@ -47,6 +48,10 @@ class Quiz extends Component {
     back = () => {
         const {title} = this.props.navigation.state.params;
         this.props.navigation.navigate({key: 'DeckDetails', routeName: 'DeckDetails', params: {title}})
+    }
+
+    setupNotification = () => {
+        clearLocalNotification().then(setLocalNotification);
     }
 
     render() {
@@ -101,7 +106,7 @@ class Quiz extends Component {
                     :
                     <View>
                         <Text style={{textAlign: 'center'}}>
-                            Quiz finished!
+                            Quiz finished! {this.setupNotification()}
                         </Text>
                         <Text style={{textAlign: 'center'}}>
                             You've answered {numOfCorrect} out of {questions.length} questions correctly!

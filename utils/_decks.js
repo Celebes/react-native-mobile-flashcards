@@ -1,6 +1,6 @@
 import {AsyncStorage} from 'react-native';
 
-export const DECKS_STORAGE_KEY = 'mobile-flashcards:decks';
+export const DECKS_STORAGE_KEY = 'kgurniak-mobile-flashcards:decks';
 
 function getInitialData() {
     const initialState = {
