@@ -36,6 +36,19 @@ class Quiz extends Component {
         this.setState(() => ({showAnswer: true}));
     }
 
+    restart = () => {
+        this.setState(() => ({
+            currentCard: 0,
+            numOfCorrect: 0,
+            showAnswer: false
+        }))
+    }
+
+    back = () => {
+        const {title} = this.props.navigation.state.params;
+        this.props.navigation.navigate({key: 'DeckDetails', routeName: 'DeckDetails', params: {title}})
+    }
+
     render() {
         const {currentCard, numOfCorrect, showAnswer} = this.state;
         const {title} = this.props.navigation.state.params;
@@ -93,6 +106,18 @@ class Quiz extends Component {
                         <Text style={{textAlign: 'center'}}>
                             You've answered {numOfCorrect} out of {questions.length} questions correctly!
                         </Text>
+                        <TouchableOpacity onPress={this.restart}
+                                          style={styles.btn}>
+                            <Text style={styles.btnText}>
+                                Restart Quiz
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.back}
+                                          style={styles.btn}>
+                            <Text style={styles.btnText}>
+                                Back to Deck
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                 }
             </View>
