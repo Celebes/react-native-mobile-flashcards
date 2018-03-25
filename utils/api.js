@@ -6,10 +6,6 @@ export function getDecksFromDB() {
         .then(getResultsFromAsyncStorageOrInitialData);
 }
 
-export function getDeckFromDB(title) {
-    // TODO
-}
-
 export function addDeckToDB(title) {
     return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
         [title]: {

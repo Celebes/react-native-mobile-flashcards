@@ -6,8 +6,8 @@ class DeckListItem extends Component {
     render() {
         const {title, numOfQuestions, navigate} = this.props;
         return (
-            <View style={styles.container}>
-                <TouchableOpacity onPress={() => navigate('DeckDetails', {title})}>
+            <TouchableOpacity onPress={() => navigate({key: 'DeckDetails', routeName: 'DeckDetails', params: {title}})}>
+                <View style={styles.container}>
                     <View>
                         <Text style={{fontSize: 34, textAlign: 'center'}}>
                             {title}
@@ -15,11 +15,11 @@ class DeckListItem extends Component {
                     </View>
                     <View>
                         <Text style={{color: 'darkgrey', textAlign: 'center'}}>
-                            {numOfQuestions} Questions
+                            {numOfQuestions} Question{numOfQuestions === 1 ? '' : 's'}
                         </Text>
                     </View>
-                </TouchableOpacity>
-            </View>
+                </View>
+            </TouchableOpacity>
         )
     }
 }
