@@ -1,13 +1,28 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Animated} from 'react-native';
 
 class DeckListItem extends Component {
+    state = {
+        bounceValue: new Animated.Value(1),
+    }
+
+    onDeckPress = () => {
+        const {title, navigate} = this.props;
+        const {bounceValue} = this.state;
+        Animated.sequence([
+            Animated.timing(bounceValue, { duration: 50, toValue: 0.7}),
+            Animated.spring(bounceValue, { toValue: 1, friction: 4})
+        ]).start();
+        setTimeout(() => navigate({key: 'DeckDetails', routeName: 'DeckDetails', params: {title}}), 100);
+    }
+
     render() {
-        const {title, numOfQuestions, navigate} = this.props;
+        const {bounceValue} = this.state;
+        const {title, numOfQuestions} = this.props;
         return (
-            <TouchableOpacity onPress={() => navigate({key: 'DeckDetails', routeName: 'DeckDetails', params: {title}})}>
-                <View style={styles.container}>
+            <TouchableOpacity onPress={this.onDeckPress}>
+                <Animated.View style={[styles.container, {transform: [{scale: bounceValue}]}]}>
                     <View>
                         <Text style={{fontSize: 34, textAlign: 'center'}}>
                             {title}
@@ -18,7 +33,7 @@ class DeckListItem extends Component {
                             {numOfQuestions} Question{numOfQuestions === 1 ? '' : 's'}
                         </Text>
                     </View>
-                </View>
+                </Animated.View>
             </TouchableOpacity>
         )
     }
