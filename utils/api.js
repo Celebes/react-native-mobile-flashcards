@@ -16,5 +16,9 @@ export function addDeckToDB(title) {
 }
 
 export function addCardToDeckInDB({title, card}) {
-    // TODO
+    return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(decks => AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
+        [title]: {
+            questions: [...JSON.parse(decks)[title]['questions'], card]
+        }
+    })))
 }

@@ -19,7 +19,8 @@ class DeckDetails extends Component {
     }
 
     render() {
-        const {title, questions} = this.props.deck;
+        const {title} = this.props.navigation.state.params;
+        const {questions} = this.props.deck;
         const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
@@ -35,7 +36,7 @@ class DeckDetails extends Component {
                     {
                         questions.length > 0 &&
                         <TouchableOpacity style={styles.btn}
-                                          onPress={() => navigate({key: 'Quiz', routeName: 'Quiz', params: {}})}>
+                                          onPress={() => navigate({key: 'Quiz', routeName: 'Quiz', params: {title}})}>
                             <Text style={styles.btnText}>
                                 Start Quiz
                             </Text>
@@ -43,7 +44,7 @@ class DeckDetails extends Component {
                     }
 
                     <TouchableOpacity style={styles.btn}
-                                      onPress={() => navigate({key: 'AddCard', routeName: 'AddCard', params: {}})}>
+                                      onPress={() => navigate({key: 'AddCard', routeName: 'AddCard', params: {title}})}>
                         <Text style={styles.btnText}>
                             Add Card
                         </Text>
