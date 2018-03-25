@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {StyleSheet, View, Text, FlatList} from 'react-native';
-import {getDecks} from '../utils/api';
+import {getDecksFromDB} from '../utils/api';
 import {receiveDecks} from '../actions';
 import DeckListItem from './DeckListItem';
 import {transformDecksToListArray} from "../utils/helpers";
@@ -10,7 +10,7 @@ class Decks extends Component {
     componentDidMount() {
         const {dispatch} = this.props;
 
-        getDecks()
+        getDecksFromDB()
             .then(decks => dispatch(receiveDecks(decks)))
     }
 
