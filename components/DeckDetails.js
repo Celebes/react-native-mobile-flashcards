@@ -3,6 +3,13 @@ import {connect} from "react-redux";
 import {StyleSheet, View, Text, TextInput, TouchableOpacity} from 'react-native';
 
 class DeckDetails extends Component {
+    static navigationOptions = ({ navigation }) => {
+        const { title } = navigation.state.params
+        return {
+            title: title
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>

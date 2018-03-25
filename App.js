@@ -46,18 +46,15 @@ const MainStack = StackNavigator({
         screen: MainTabs
     },
     DeckDetails: {
-        screen: DeckDetails,
-        navigationOptions: {
-            title: 'Deck Details'
-        }
+        screen: DeckDetails
     }
 }, {
     navigationOptions: {
         headerTintColor: '#fff',
         headerStyle: {
             backgroundColor: '#000',
-            height: 40,
-        },
+            height: 40
+        }
     },
 });
 

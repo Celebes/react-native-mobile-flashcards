@@ -7,7 +7,7 @@ class DeckListItem extends Component {
         const {title, numOfQuestions, navigate} = this.props;
         return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={() => navigate('DeckDetails')}>
+                <TouchableOpacity onPress={() => navigate('DeckDetails', {title})}>
                     <View>
                         <Text style={{fontSize: 34, textAlign: 'center'}}>
                             {title}
