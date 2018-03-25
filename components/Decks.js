@@ -15,7 +15,7 @@ class Decks extends Component {
     }
 
     renderItem = ({item}) => {
-         return <DeckListItem {...item}/>
+         return <DeckListItem navigate={this.props.navigation.navigate} {...item}/>
     };
 
     render() {

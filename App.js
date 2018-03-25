@@ -5,8 +5,9 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './reducers';
 import {Constants} from 'expo'
-import {TabNavigator} from "react-navigation";
-import AddDeck from "./components/AddDeck";
+import {TabNavigator, StackNavigator} from 'react-navigation';
+import AddDeck from './components/AddDeck';
+import DeckDetails from './components/DeckDetails';
 
 function UdaciStatusBar({backgroundColor, ...props}) {
     return (
@@ -30,11 +31,34 @@ const MainTabs = TabNavigator({
         }
     }
 }, {
+    navigationOptions: {
+        header: null
+    },
     tabBarOptions: {
         style: {
             backgroundColor: '#000'
         }
     }
+});
+
+const MainStack = StackNavigator({
+    Home: {
+        screen: MainTabs
+    },
+    DeckDetails: {
+        screen: DeckDetails,
+        navigationOptions: {
+            title: 'Deck Details'
+        }
+    }
+}, {
+    navigationOptions: {
+        headerTintColor: '#fff',
+        headerStyle: {
+            backgroundColor: '#000',
+            height: 40,
+        },
+    },
 });
 
 export default class App extends React.Component {
@@ -43,7 +67,7 @@ export default class App extends React.Component {
             <Provider store={createStore(reducer)}>
                 <View style={styles.container}>
                     <UdaciStatusBar backgroundColor='#000' barStyle="light-content"/>
-                    <MainTabs/>
+                    <MainStack/>
                 </View>
             </Provider>
         );
