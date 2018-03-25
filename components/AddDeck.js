@@ -26,11 +26,7 @@ class AddDeck extends Component {
             inputText: ''
         }));
 
-        this.toHome()
-    }
-
-    toHome = () => {
-        this.props.navigation.dispatch(NavigationActions.back({key: 'AddDeck'}))
+        this.props.navigation.navigate({key: 'DeckDetails', routeName: 'DeckDetails', params: {inputText}})
     }
 
     render() {
