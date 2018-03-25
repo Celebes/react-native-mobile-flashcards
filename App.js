@@ -8,6 +8,8 @@ import {Constants} from 'expo'
 import {TabNavigator, StackNavigator} from 'react-navigation';
 import AddDeck from './components/AddDeck';
 import DeckDetails from './components/DeckDetails';
+import AddCard from './components/AddCard';
+import Quiz from './components/Quiz';
 
 function UdaciStatusBar({backgroundColor, ...props}) {
     return (
@@ -47,6 +49,18 @@ const MainStack = StackNavigator({
     },
     DeckDetails: {
         screen: DeckDetails
+    },
+    AddCard: {
+        screen: AddCard,
+        navigationOptions: {
+            title: 'Add Card'
+        }
+    },
+    Quiz: {
+        screen: Quiz,
+        navigationOptions: {
+            title: 'Quiz'
+        }
     }
 }, {
     navigationOptions: {
