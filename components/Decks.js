@@ -23,9 +23,6 @@ class Decks extends Component {
 
         return (
             <View style={styles.container}>
-                <Text style={{alignSelf: 'center'}}>
-                    DECKS
-                </Text>
                 <FlatList data={decksList} renderItem={this.renderItem}/>
             </View>
         )
@@ -37,6 +34,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'stretch',
+        paddingTop: 15
     }
 });
 
